@@ -15,6 +15,7 @@
 // CONSTS
 const todoItem = document.querySelector(".todo-item");
 const taskInput = document.getElementById("todo-display__input");
+const btnRemoveCompleted = document.querySelector(".todo-btns__remove-completed");
 
 // VARIABLES
 let tasks = [];
@@ -25,7 +26,7 @@ const handleEnterKey = (event) => {
   if (event.key === "Enter") {
     const task = taskInput.value;
     if (task) {
-      tasks.push({ id: taskId, text: task });
+      tasks.push({ id: taskId, text: task, completed: false });
       console.log("> handleEnterKey, tasks:", tasks);
       taskId++;
     }
@@ -60,5 +61,12 @@ const completedTask = (id) => {
   console.log("> completedTask, tasks:", tasks);
 };
 
+const deleteCompletedTask = () => {
+  tasks = tasks.filter((task) => !task.completed);
+  renderResults();
+  console.log("> deleteCompletedTask, tasks:", tasks);
+};
+
 // LISTENERS
 taskInput.addEventListener("keyup", handleEnterKey);
+btnRemoveCompleted.addEventListener("click", deleteCompletedTask);

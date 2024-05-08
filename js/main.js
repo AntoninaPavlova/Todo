@@ -32,6 +32,7 @@ const handleEnterKey = (event) => {
     }
     renderResults();
     taskInput.value = "";
+    saveInLocalStorage();
   }
 };
 
@@ -53,25 +54,46 @@ const deleteTask = (id) => {
   tasks = tasks.filter((task) => task.id !== id);
   renderResults();
   console.log("> deleteTask, tasks:", tasks);
+  saveInLocalStorage();
 };
 
 const completedTask = (id) => {
   tasks = tasks.map((task) => (task.id === id ? { ...task, completed: !task.completed } : task));
   renderResults();
   console.log("> completedTask, tasks:", tasks);
+  saveInLocalStorage();
 };
 
 const deleteCompletedTask = () => {
   tasks = tasks.filter((task) => !task.completed);
   renderResults();
   console.log("> deleteCompletedTask, tasks:", tasks);
+  saveInLocalStorage();
 };
 
 const deleteAllTasks = () => {
   tasks = [];
   renderResults();
   console.log("> deleteAllTasks, tasks:", tasks);
+  saveInLocalStorage();
 };
+
+const saveInLocalStorage = () => {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+};
+
+const getFromLocalStorage = () => {
+  const savedTasks = localStorage.getItem("tasks");
+
+  if (savedTasks) {
+    tasks = JSON.parse(savedTasks);
+  }
+
+  renderResults();
+  console.log("> getFromLocalStorage, tasks:", tasks);
+};
+
+getFromLocalStorage();
 
 // LISTENERS
 taskInput.addEventListener("keyup", handleEnterKey);

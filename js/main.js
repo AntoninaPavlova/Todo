@@ -19,16 +19,18 @@ const btnRemoveAll = document.querySelector(".todo-btns__remove-all");
 
 // VARIABLES
 let tasks = [];
-let taskId = 1;
 
 // FUNCTIONS
+const generateUniqueId = () => {
+  return Date.now(); 
+};
+
 const handleEnterKey = (event) => {
   if (event.key === "Enter") {
     const task = taskInput.value;
     if (task) {
-      tasks.push({ id: taskId, text: task, completed: false });
+      tasks.push({ id: generateUniqueId(), text: task, completed: false });
       console.log("> handleEnterKey, tasks:", tasks);
-      taskId++;
     }
     renderResults();
     taskInput.value = "";

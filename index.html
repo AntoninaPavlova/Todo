@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <title>Task 1</title>
+    <title>Todo list</title>
 
     <!-- Chrome, Firefox OS and Opera -->
     <meta name="theme-color" content="#000" />
@@ -27,14 +27,34 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="container">
-            <main class="main">
-                <section class="todo">
+    <div class="todo-wrapper">
+        <div class="todo-container">
+            <main class="todo-main">
+                <div class="todo-inner">
+                    <h1 class="todo__title">Todo-list</h1>
+                    <div class="todo-display">
+                        <label for="todo-display__input" class="todo-display__label">Title</label>
+                        <input type="text" id="todo-display__input" placeholder="Title">
+                    </div>
+                    <div class="todo-result">
+                        <div class="todo-table">
+                            <div class="todo-item">
+                                <input type="checkbox" class="todo-item__checkbox">
+                                <span class="todo-item__text">Text from todo-display__input</span>
+                                <div class="todo-item__delete">
+                                    <img src="img/delete.png" width ="41" height="41" alt="delete">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="todo-btns">
+                            <button class="todo-btns__remove-completed">remove completed</button>
+                            <button class="todo-btns__remove-all">remove all</button>
+                        </div>
+                    </div>
 
-                </section>
-
+                </div>
             </main>
+
         </div>
     </div>
 

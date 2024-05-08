@@ -1,24 +1,131 @@
-.wrapper {
+.todo-wrapper {
   max-width: 1170px;
   width: 100%;
   min-width: 320px;
   margin: 0 auto;
   font-family: "Inter", sans-serif;
 }
-.wrapper img {
+.todo-wrapper img {
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
-.container {
+.todo-container {
   max-width: calc(1170px - 30px);
   width: 100%;
   margin: 0 auto;
 }
-.main {
+.todo-main {
+  max-width: 550px;
   width: 100%;
   height: 100vh;
   margin: 0 auto;
   display: grid;
   align-items: center;
+}
+.todo-inner {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 42px;
+}
+.todo-display {
+  display: grid;
+}
+.todo__title {
+  margin-bottom: 18px;
+  font-size: 48px;
+  font-weight: normal;
+  text-align: center;
+}
+.todo-display__label {
+  font-size: 12px;
+  line-height: 1;
+  color: #666;
+  opacity: 0.7;
+}
+#todo-display__input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 15px 0px;
+  font-size: 15px;
+  color: #666;
+  border-bottom: 1px solid black;
+}
+#todo-display__input::placeholder {
+  color: #666;
+  opacity: 0.3;
+}
+.todo-table {
+  padding: 34px 0 40px 16px;
+}
+.todo-item {
+  display: grid;
+  grid-template-columns: 9% 1fr 14%;
+  align-items: center;
+  justify-content: space-between;
+}
+.todo-item__checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #000;
+  outline: none;
+  cursor: pointer;
+}
+.todo-item__text {
+  font-size: 15px;
+  color: #333;
+}
+.todo-item__checkbox:checked {
+  width: 28px;
+  height: 23px;
+  background: url(../img/checked.png) no-repeat;
+  border: none;
+}
+.todo-item__delete {
+  justify-self: end;
+  cursor: pointer;
+}
+.todo-btns {
+  display: grid;
+  grid-template-columns: 47% 40%;
+  justify-content: space-between;
+}
+.todo-btns__remove-completed,
+.todo-btns__remove-all {
+  width: 100%;
+  height: 36px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #fff;
+  background-color: #27a69b;
+  border-radius: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.todo-btns__remove-completed:hover,
+.todo-btns__remove-all:hover {
+  background-color: #92cfc8;
+}
+.todo-btns__remove-completed {
+  max-width: 218px;
+}
+.todo-btns__remove-all {
+  max-width: 188px;
+}
+@media (max-width: 466.98px) {
+  .todo-inner {
+    padding: 10px 5px;
+  }
+  .todo-table {
+    padding: 15px 0;
+  }
+  .todo-btns__remove-completed,
+  .todo-btns__remove-all {
+    font-size: 10px;
+  }
 }

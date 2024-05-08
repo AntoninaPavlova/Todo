@@ -31,3 +31,14 @@ button {
   border: 0;
   cursor: pointer;
 }
+
+input {
+  border: none;
+  outline: none;
+}
+
+input[type="checkbox" i] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}

@@ -84,6 +84,9 @@
   background: url(../img/checked.png) no-repeat;
   border: none;
 }
+.todo-item__checkbox:checked + .todo-item__text {
+  text-decoration: line-through;
+}
 .todo-item__delete {
   justify-self: end;
   cursor: pointer;

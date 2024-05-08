@@ -13,9 +13,36 @@
 // Задание со звездочкой* Добавить возможность редактирования задачи.
 
 // CONSTS
+const todoItem = document.querySelector(".todo-item");
+const taskInput = document.getElementById("todo-display__input");
 
 // VARIABLES
+let tasks = [];
 
 // FUNCTIONS
+const renderResults = () => {
+  todoItem.innerHTML = "";
+  tasks.forEach((task) => {
+    todoItem.innerHTML += ` 
+        <input type="checkbox" class="todo-item__checkbox">
+        <span class="todo-item__text">${task}</span>
+        <div class="todo-item__delete">
+            <img src="img/delete.png" width="41" height="41" alt="delete">
+        </div>`;
+  });
+};
+
+const handleEnterKey = (event) => {
+  if (event.key === "Enter") {
+    const task = taskInput.value;
+    if (task) {
+      tasks.push(task);
+      console.log("> handleEnterKey, tasks:", tasks);
+    }
+    renderResults();
+    taskInput.value = "";
+  }
+};
 
 // LISTENERS
+taskInput.addEventListener("keyup", handleEnterKey);

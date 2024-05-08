@@ -65,6 +65,7 @@
   grid-template-columns: 9% 1fr 14%;
   align-items: center;
   justify-content: space-between;
+  row-gap: 35px;
 }
 .todo-item__checkbox {
   width: 18px;

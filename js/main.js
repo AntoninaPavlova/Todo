@@ -4,7 +4,6 @@
 // HTML + (CSS или любой препроцессор) + JavaScript
 
 // В нашем приложении должно быть поле для ввода задачи, после нажатия на “Enter” оно должно добавляться в список.
-
 // Данную задачу можно удалить, можно отметить выполненной.
 // Под списком должны быть кнопки для удаления выполненных задач, а также для удаления всех задач.
 
@@ -16,6 +15,7 @@
 const todoItem = document.querySelector(".todo-item");
 const taskInput = document.getElementById("todo-display__input");
 const btnRemoveCompleted = document.querySelector(".todo-btns__remove-completed");
+const btnRemoveAll = document.querySelector(".todo-btns__remove-all");
 
 // VARIABLES
 let tasks = [];
@@ -67,6 +67,13 @@ const deleteCompletedTask = () => {
   console.log("> deleteCompletedTask, tasks:", tasks);
 };
 
+const deleteAllTasks = () => {
+  tasks = [];
+  renderResults();
+  console.log("> deleteAllTasks, tasks:", tasks);
+};
+
 // LISTENERS
 taskInput.addEventListener("keyup", handleEnterKey);
 btnRemoveCompleted.addEventListener("click", deleteCompletedTask);
+btnRemoveAll.addEventListener("click", deleteAllTasks);

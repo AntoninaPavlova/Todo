@@ -38,7 +38,9 @@ const renderResults = () => {
   todoItem.innerHTML = "";
   tasks.forEach((task) => {
     todoItem.innerHTML += `
-        <input type="checkbox" class="todo-item__checkbox">
+    <input type="checkbox" class="todo-item__checkbox" onchange="completedTask(${task.id})" ${
+      task.completed ? "checked" : ""
+    }>
         <span class="todo-item__text">${task.text}</span>
         <div onclick="deleteTask(${task.id})" class="todo-item__delete">
             <img src="img/delete.png" width="41" height="41" alt="delete">
@@ -50,6 +52,12 @@ const deleteTask = (id) => {
   tasks = tasks.filter((task) => task.id !== id);
   renderResults();
   console.log("> deleteTask, tasks:", tasks);
+};
+
+const completedTask = (id) => {
+  tasks = tasks.map((task) => (task.id === id ? { ...task, completed: !task.completed } : task));
+  renderResults();
+  console.log("> completedTask, tasks:", tasks);
 };
 
 // LISTENERS

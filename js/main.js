@@ -16,13 +16,17 @@ const todoItem = document.querySelector(".todo-item");
 const taskInput = document.getElementById("todo-display__input");
 const btnRemoveCompleted = document.querySelector(".todo-btns__remove-completed");
 const btnRemoveAll = document.querySelector(".todo-btns__remove-all");
+const modal = document.querySelector(".todo-modal");
+const modalText = document.getElementById("todo-modal__text");
+const closeIcon = document.querySelector(".todo-modal__close");
+const btnSaveChanges = document.querySelector(".todo-modal__save");
 
 // VARIABLES
 let tasks = [];
 
 // FUNCTIONS
 const generateUniqueId = () => {
-  return Date.now(); 
+  return Date.now();
 };
 
 const handleEnterKey = (event) => {
@@ -45,7 +49,7 @@ const renderResults = () => {
     <input type="checkbox" class="todo-item__checkbox" onchange="completedTask(${task.id})" ${
       task.completed ? "checked" : ""
     }>
-        <span class="todo-item__text">${task.text}</span>
+        <span onclick="openModal(${task.id})" class="todo-item__text">${task.text}</span>
         <div onclick="deleteTask(${task.id})" class="todo-item__delete">
             <img src="img/delete.png" width="41" height="41" alt="delete">
         </div>`;
@@ -60,7 +64,13 @@ const deleteTask = (id) => {
 };
 
 const completedTask = (id) => {
-  tasks = tasks.map((task) => (task.id === id ? { ...task, completed: !task.completed } : task));
+  tasks = tasks.map((task) => {
+    if (task.id === id) {
+      return { ...task, completed: !task.completed };
+    }
+    return task;
+  });
+
   renderResults();
   console.log("> completedTask, tasks:", tasks);
   saveInLocalStorage();
@@ -78,6 +88,42 @@ const deleteAllTasks = () => {
   renderResults();
   console.log("> deleteAllTasks, tasks:", tasks);
   saveInLocalStorage();
+};
+
+const openModal = (id) => {
+  const task = tasks.find((task) => task.id === id);
+
+  console.log("> openModal, id:", id);
+
+  modalText.value = task.text;
+  console.log("> openModal, task.text:", task.text);
+
+  modalText.setAttribute("name", id);
+  modal.style.display = "block";
+};
+
+const editTask = () => {
+  const taskId = parseInt(modalText.getAttribute("name"));
+
+  console.log("> editTask, taskId:", taskId);
+  console.log("> editTask, modalText.value:", modalText.value);
+
+  tasks = tasks.map((task) => {
+    console.log(task.id === taskId);
+    if (task.id === taskId) {
+      return { ...task, text: modalText.value };
+    }
+    return task;
+  });
+
+  console.log("> editTask, tasks:", tasks);
+  renderResults();
+  saveInLocalStorage();
+  closeModal();
+};
+
+const closeModal = () => {
+  modal.style.display = "none";
 };
 
 const saveInLocalStorage = () => {
@@ -101,3 +147,5 @@ getFromLocalStorage();
 taskInput.addEventListener("keyup", handleEnterKey);
 btnRemoveCompleted.addEventListener("click", deleteCompletedTask);
 btnRemoveAll.addEventListener("click", deleteAllTasks);
+closeIcon.addEventListener("click", closeModal);
+btnSaveChanges.addEventListener("click", editTask);

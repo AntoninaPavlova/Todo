@@ -20,16 +20,21 @@
   width: 100%;
   height: 100vh;
   margin: 0 auto;
+  display: -ms-grid;
   display: grid;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 .todo-inner {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
   margin: 0 auto;
   padding: 10px 42px;
 }
 .todo-display {
+  display: -ms-grid;
   display: grid;
 }
 .todo__title {
@@ -45,6 +50,7 @@
   opacity: 0.7;
 }
 #todo-display__input {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
@@ -52,6 +58,22 @@
   font-size: 15px;
   color: #666;
   border-bottom: 1px solid black;
+}
+#todo-display__input::-webkit-input-placeholder {
+  color: #666;
+  opacity: 0.3;
+}
+#todo-display__input::-moz-placeholder {
+  color: #666;
+  opacity: 0.3;
+}
+#todo-display__input:-ms-input-placeholder {
+  color: #666;
+  opacity: 0.3;
+}
+#todo-display__input::-ms-input-placeholder {
+  color: #666;
+  opacity: 0.3;
 }
 #todo-display__input::placeholder {
   color: #666;
@@ -61,9 +83,15 @@
   padding: 34px 0 40px 16px;
 }
 .todo-item {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 9% 1fr 14%;
   grid-template-columns: 9% 1fr 14%;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   row-gap: 35px;
 }
@@ -89,12 +117,17 @@
   text-decoration: line-through;
 }
 .todo-item__delete {
+  -ms-grid-column-align: end;
   justify-self: end;
   cursor: pointer;
 }
 .todo-btns {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 47% 40%;
   grid-template-columns: 47% 40%;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
 }
 .todo-btns__remove-completed,
@@ -103,8 +136,14 @@
   width: 100%;
   height: 36px;
   margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   font-size: 14px;
   color: #fff;
@@ -151,11 +190,16 @@
   font-size: 18px;
   border: 3px solid #333333;
   background: #f1f1f1;
+  -webkit-box-shadow: 0 10px 30px rgba(51, 51, 51, 0.4);
   box-shadow: 0 10px 30px rgba(51, 51, 51, 0.4);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 .todo-modal__coll {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: (1fr) [2];
   grid-template-columns: repeat(2, 1fr);
 }
 #todo-modal__text {
@@ -185,7 +229,9 @@
     font-size: 10px;
   }
   .todo-modal__coll {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 100%;
     grid-template-columns: 100%;
     row-gap: 30px;
   }

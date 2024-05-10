@@ -25,17 +25,26 @@ const btnSaveChanges = document.querySelector(".todo-modal__save");
 let tasks = [];
 
 // FUNCTIONS
+
+// Date.now() не всегда стоит использовать в качестве уникального id.
+// + return можно убрать и оставить = () => Date.now()
 const generateUniqueId = () => {
   return Date.now();
 };
 
+
 const handleEnterKey = (event) => {
   if (event.key === "Enter") {
     const task = taskInput.value.trim();
+
+
     if (task) {
       tasks.push({ id: generateUniqueId(), text: task, completed: false });
       console.log("> handleEnterKey, tasks:", tasks);
     }
+    // Получается что если задачи нет, то мы всё равно вызываем функцию renderResults + taskInput отчищаем
+    // А также в локалсторадж сохраняем, при этом ничего не добавив :D
+
     renderResults();
     taskInput.value = "";
     saveInLocalStorage();
@@ -46,9 +55,8 @@ const renderResults = () => {
   todoItem.innerHTML = "";
   tasks.forEach((task) => {
     todoItem.innerHTML += `
-    <input type="checkbox" class="todo-item__checkbox" onchange="completedTask(${task.id})" ${
-      task.completed ? "checked" : ""
-    }>
+    <input type="checkbox" class="todo-item__checkbox" onchange="completedTask(${task.id})" ${task.completed ? "checked" : ""
+      }>
         <span onclick="openModal(${task.id})" class="todo-item__text">${task.text}</span>
         <div onclick="deleteTask(${task.id})" class="todo-item__delete">
             <img src="img/delete.png" width="41" height="41" alt="delete">
@@ -59,6 +67,7 @@ const renderResults = () => {
 const deleteTask = (id) => {
   tasks = tasks.filter((task) => task.id !== id);
   renderResults();
+  // console.log надо убрать)
   console.log("> deleteTask, tasks:", tasks);
   saveInLocalStorage();
 };
@@ -72,6 +81,7 @@ const completedTask = (id) => {
   });
 
   renderResults();
+  // тоже)
   console.log("> completedTask, tasks:", tasks);
   saveInLocalStorage();
 };
@@ -79,6 +89,7 @@ const completedTask = (id) => {
 const deleteCompletedTask = () => {
   tasks = tasks.filter((task) => !task.completed);
   renderResults();
+  // и тут)
   console.log("> deleteCompletedTask, tasks:", tasks);
   saveInLocalStorage();
 };
@@ -86,6 +97,7 @@ const deleteCompletedTask = () => {
 const deleteAllTasks = () => {
   tasks = [];
   renderResults();
+  // и здесь)
   console.log("> deleteAllTasks, tasks:", tasks);
   saveInLocalStorage();
 };
@@ -103,6 +115,10 @@ const openModal = (id) => {
 };
 
 const editTask = () => {
+
+  // А нам действительно нужен parseInt?
+  // Мы ведь можем привести к числу другим, гораздо более лучшим образом :)
+  // В моём понимании parseInt это найти число из строки
   const taskId = parseInt(modalText.getAttribute("name"));
 
   console.log("> editTask, taskId:", taskId);
@@ -127,10 +143,12 @@ const closeModal = () => {
 };
 
 const saveInLocalStorage = () => {
+  // локал сторадж ключи стоит выносить в отдельные переменные
   localStorage.setItem("tasks", JSON.stringify(tasks));
 };
 
 const getFromLocalStorage = () => {
+  // локал сторадж ключи стоит выносить в отдельные переменные
   const savedTasks = localStorage.getItem("tasks");
 
   if (savedTasks) {
@@ -144,6 +162,7 @@ const getFromLocalStorage = () => {
 getFromLocalStorage();
 
 // LISTENERS
+// Думаю слушатели стоит вынести на самый верх
 taskInput.addEventListener("keyup", handleEnterKey);
 btnRemoveCompleted.addEventListener("click", deleteCompletedTask);
 btnRemoveAll.addEventListener("click", deleteAllTasks);

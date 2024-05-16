@@ -132,7 +132,8 @@
 }
 .todo-btns__remove-completed,
 .todo-btns__remove-all,
-.todo-modal__save {
+.todo-modal__save,
+.todo-modal__delete {
   width: 100%;
   height: 36px;
   margin: 0 auto;
@@ -145,16 +146,24 @@
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 14px;
   color: #fff;
   background-color: #27a69b;
   border-radius: 2px;
   text-transform: uppercase;
   cursor: pointer;
 }
+.todo-btns__remove-completed,
+.todo-btns__remove-all {
+  font-size: 14px;
+}
+.todo-modal__save,
+.todo-modal__delete {
+  font-size: 12px;
+}
 .todo-btns__remove-completed:hover,
 .todo-btns__remove-all:hover,
-.todo-modal__save:hover {
+.todo-modal__save:hover,
+.todo-modal__delete:hover {
   background-color: #92cfc8;
 }
 .todo-btns__remove-completed {
@@ -163,7 +172,8 @@
 .todo-btns__remove-all {
   max-width: 188px;
 }
-.todo-modal__save {
+.todo-modal__save,
+.todo-modal__delete {
   max-width: 188px;
 }
 .todo-modal {
@@ -184,7 +194,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 80%;
+  max-width: 550px;
   padding: 40px;
   text-align: left;
   font-size: 18px;
@@ -199,11 +209,22 @@
 .todo-modal__coll {
   display: -ms-grid;
   display: grid;
+  -webkit-column-gap: 6px;
+  -moz-column-gap: 6px;
+  column-gap: 6px;
   -ms-grid-columns: (1fr) [2];
   grid-template-columns: repeat(2, 1fr);
 }
 #todo-modal__text {
   padding: 10px;
+}
+.todo-modal__btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 6px;
+  -moz-column-gap: 6px;
+  column-gap: 6px;
 }
 .todo-modal__close {
   position: absolute;
@@ -217,6 +238,20 @@
   background-size: cover;
   cursor: pointer;
 }
+
+@media (max-width: 575.98px) {
+  .todo-modal__content {
+    padding: 30px;
+  }
+  .todo-modal__coll {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 100%;
+    grid-template-columns: 100%;
+    row-gap: 10px;
+  }
+}
+
 @media (max-width: 466.98px) {
   .todo-inner {
     padding: 10px 5px;
@@ -227,12 +262,5 @@
   .todo-btns__remove-completed,
   .todo-btns__remove-all {
     font-size: 10px;
-  }
-  .todo-modal__coll {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 100%;
-    grid-template-columns: 100%;
-    row-gap: 30px;
   }
 }
